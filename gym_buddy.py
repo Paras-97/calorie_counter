@@ -1,24 +1,36 @@
+'''
+    This script will help you track calories 
+    and generate data based on the foods you consume
+'''
+
 import csv
+
 
 global save_data
 global cals
 
 
-def meal_cal_counter(meal_type, meals):
+def meal_cal_counter(meal_type, meals) -> None:
+    '''Calculates meal calories
+
+    Args:
+        meal_type (string): user selection
+        meals (dict): meals presented to the user
+    '''
+
+
     global cals
     global save_data
     print("What would you like to have for {}?".format(meal_type))
     print("The options are: ")
-    for i,meal in enumerate(meals):
-        i=i+1
-        print(str(i)+"."+meal+" ---------- "+str(meals[meal])+"cals")
+    for _,meal in enumerate(meals,1):
+        print(str(_)+"."+meal+" ---------- "+str(meals[meal])+"cals")
     
     select_meal = input("\n Please choose the number infront of the meal: ")
     meal_selected = ""
     j = 0
-    for i,meal in enumerate(meals):
-        i = i+1
-        if str(i) == select_meal:
+    for _,meal in enumerate(meals,1):
+        if str(_) == select_meal:
             meal_selected = meal
             cals = cals - meals[meal]
     print("Your selected meal is: ", meal_selected)
@@ -27,6 +39,8 @@ def meal_cal_counter(meal_type, meals):
 
 
 def main():
+    '''Start of the program
+    '''
 
     global save_data
     global cals
@@ -35,9 +49,11 @@ def main():
     cals = int(input("Enter your total calories: "))
     save_data = []
 
-    breakfast = {"Oats":200, "Bread and eggs":300, "Smashed avocado with two breads":400}
-    lunch = {"Rice and curry":600, "Chicken breast and roasted veggies":500, "Chicken curry with rice":600}
-    dinner = {"Salmon and asparagus":600, "Chicken breast and veggies":500, "Salad":300}
+    
+
+    breakfast = {"Oats":200, "Bread and eggs":300, "Smashed avocado with two breads":400} #To be updated by api
+    lunch = {"Rice and curry":600, "Chicken breast and roasted veggies":500, "Chicken curry with rice":600} #To be updated by api
+    dinner = {"Salmon and asparagus":600, "Chicken breast and veggies":500, "Salad":300} #To be updated by api
 
     meal_inp = input("Press: \n 1 for Breakfast \n 2 for Lunch \n 3 for Dinner \n")
 
